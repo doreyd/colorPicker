@@ -8,6 +8,8 @@
 // color picker will be appended to
 // - the target, that takes in the id value of the html element to which the
 // picked color will be applied to.
+// the generator function returns also the color picker html element that
+// you can then change its position and control its display as you please.
 // ********************************************************************
 // this Color Picker consists of only three basic files:
 // - javascript file named: colorPicker.js
