@@ -12,14 +12,13 @@
 // the generator function returns also the color picker html element that
 // you can then change its position and control its display as you please.
 // ********************************************************************
-// this Color Picker consists of only three basic files:
-// - javascript file named: colorPicker.js
-// - the css file named: colorPicker.css
-// - and a small image named: colorIcon.jpg.
+// this Color Picker consists of only one javascript file "colorPicker.js"
+//             and a small image named: colorIcon.jpg.
 // ********************************************************************
 // *****************  Created by Doreyd Mehila 2019 *******************
 // ********************************************************************
-
+// *************************** Enjoy !!!! *****************************
+// This is the color picker generator function
 const generater = (rootAnchorId, targetId) => {
   // Selecting the rootAnchor & the target element
   const rootAnchor = document.getElementById(rootAnchorId);
@@ -55,12 +54,155 @@ const generater = (rootAnchorId, targetId) => {
   $barCanvas.width = "255";
   $barCanvas.height = "20";
 
+  // ******************************************************************
+  // ****** Initializing the CSS dynamically using Javascript *********
+  // ******************************************************************
+  // ******* The CSS to be applied in a Javascript Object format ******
+  // ******************************************************************
+
+  const colorPicker = {
+    position: "absolute",
+    top: "300px",
+    left: "40px",
+    height: "288px",
+    width: "240px",
+    display: "block",
+    background: "white",
+    "border-radius": "10px",
+    "box-shadow":
+      "0 2px 2px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22)",
+    "border-style": "solid",
+    "border-width": "1px",
+    "z-index": "201",
+    "border-color": "#cecec8"
+  };
+
+  const colorIcon = {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    "border-radius": "50%",
+    transition: "all 0.1s linear"
+  };
+
+  const colorIconHover = {
+    transform: "rotate(90deg)"
+  };
+
+  const colorConsole = {
+    position: "absolute",
+    top: "0px",
+    left: "250px",
+    width: "275px",
+    height: "288px",
+    display: "block",
+    "border-style": "solid",
+    "border-color": "#cecec8",
+    "border-width": "1px",
+    "border-radius": "10px",
+    "z-index": "200",
+    background: "white",
+    " box-shadow":
+      "0 2px 2px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22)"
+  };
+  hueBar = {
+    position: "absolute",
+    left: "10px",
+    top: "10px",
+    width: "255",
+    height: "10px",
+    "border-top-style": "solid",
+    "border-top-width": "1px",
+    "border-top-color": "#cecec8",
+
+    "border-bottom-style": "solid",
+    "border-bottom-width": "1px",
+    "border-bottom-color": "#cecec8",
+
+    " border-left-style": "solid",
+    "border-left-width": "1px",
+    "border-left-color": "#cecec8",
+    "z-index": "201",
+
+    "border-radius": "5px",
+    overflow: "hidden"
+  };
+
+  const colorCursor = {
+    position: "absolute",
+    left: " 4px",
+    top: "5px",
+    width: "14px",
+    height: "14px",
+    "border-radius": "10px",
+    display: "block",
+    background: "hsl(0, 90%, 50%)",
+    "z-index": "202",
+    "border-style": "solid",
+    "border-width": "3px",
+    "border-color": "white"
+  };
+
+  const colorScreen = {
+    position: "absolute",
+    left: "10px",
+    top: "30px",
+    width: "255px",
+    height: "250px",
+    background: "white",
+    "z-index": "201",
+    "border-radius": "10px",
+    overflow: "hidden"
+  };
+  const colorSquareClass = {
+    width: "18px",
+    height: "18px",
+    position: "absolute",
+    top: "100px",
+    "border-radius": "4px",
+    "border-color": "#cecec8",
+    "border-style": "solid",
+    "border-width": "1px"
+  };
+  const colorDetailsClass = {
+    border: "0px solid",
+    position: "absolute",
+    outline: "none",
+    "font-family": "Helvetica",
+    "font-weight": "bold",
+    "font-size": "16px",
+    width: "150px",
+    left: "10px",
+    color: "#180066"
+  };
+
+  // *** The Javascript function that dynamically applies all the CSS ***
+  const applyStyle = (elem, style, update) => {
+    let newStyle = "";
+    for (let key in style) newStyle += `${key}:${style[key]};`; // applying basic css
+    if (update) for (let key2 in update) newStyle += `${key2}:${update[key2]};`; // applying update css if any
+    elem.setAttribute("style", newStyle);
+  };
+
+  // ********* Running the Javascript function above as needed **********
+  applyStyle($colorPicker, colorPicker);
+  applyStyle($colorIcon, colorIcon);
+  $colorIcon.onmouseover = () =>
+    applyStyle($colorIcon, colorIcon, colorIconHover);
+  $colorIcon.onmouseout = () => applyStyle($colorIcon, colorIcon);
+
+  applyStyle($colorConsole, colorConsole);
+  applyStyle($hueBar, hueBar);
+  applyStyle($colorCursor, colorCursor);
+  applyStyle($colorScreen, colorScreen);
+
   const colorInput = (elem, Y) => {
-    elem.className = "colorDetails";
+    applyStyle(elem, colorDetailsClass);
     elem.spellcheck = false;
     elem.style.top = Y + "px";
   };
 
+  // Creating the RGB & HEX color text that appear in the bottom left
   colorTextRgb = createElem("colorTextRgb", "input", $colorPicker);
   colorTextHex = createElem("colorTextHex", "input", $colorPicker);
   colorInput(colorTextHex, 252);
@@ -189,7 +331,7 @@ const generater = (rootAnchorId, targetId) => {
     for (let j = 0; j < colorList.length / 10; j++) {
       for (let i = 0; i < 10; i++) {
         let newColor = document.createElement("div");
-        newColor.className = "colorSquare";
+        applyStyle(newColor, colorSquareClass);
         newColor.style.background = "#" + colorList[j * 10 + i];
         changePosition(newColor, 10 + 25 * j, 10 + 22 * i);
         mouseEvents(newColor);
@@ -203,7 +345,7 @@ const generater = (rootAnchorId, targetId) => {
     for (let j = 0; j < 7; j++) {
       for (let i = 0; i < 10; i++) {
         let newColor = document.createElement("div");
-        newColor.className = "colorSquare";
+        applyStyle(newColor, colorSquareClass);
         let saturation = 100 - (20 + j * 10);
         newColor.style.background = `hsl(${hslBase[i]},100%, ${saturation}%)`;
         changePosition(newColor, 10 + 22 * (2.5 + j), 10 + 22 * i);

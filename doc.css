@@ -6,13 +6,6 @@
   height: 100px;
 }
 
-#target2 {
-  position: absolute;
-  top: 100px;
-  left: 300px;
-  width: 100px;
-  height: 100px;
-}
 body {
   background: #b2b1b1;
 }
