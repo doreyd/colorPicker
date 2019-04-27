@@ -3,7 +3,7 @@
 //********************************************************************
 // ** This is a Color Picker developed entirely with javascript **
 // To use it, all you need to do is adding the file to your HTML document
-// then you would call the function named  generater(anchor, target)
+// then you would call the function named  generator(anchor, target)
 // that takes two variables :
 // - the anchor, that takes in the id value of the html element to which the
 // color picker will be appended to
@@ -19,7 +19,7 @@
 // ********************************************************************
 // *************************** Enjoy !!!! *****************************
 // This is the color picker generator function
-const generater = (rootAnchorId, targetId) => {
+const generator = (rootAnchorId, targetId) => {
   // Selecting the rootAnchor & the target element
   const rootAnchor = document.getElementById(rootAnchorId);
   const target = document.getElementById(targetId);
